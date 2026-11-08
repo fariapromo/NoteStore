@@ -1,0 +1,49 @@
+{
+  "entities": {
+    "Note": {
+      "title": "Note",
+      "description": "A study note or summary created by a student or tutor.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique identifier of the note" },
+        "title": { "type": "string", "description": "Title of the note", "maxLength": 160 },
+        "subject": { "type": "string", "description": "Academic course or subject matter", "maxLength": 60 },
+        "content": { "type": "string", "description": "Full markdown or text content of the note" },
+        "price": { "type": "number", "description": "Listing price for the note in USD (0 for free)" },
+        "isPublic": { "type": "boolean", "description": "Whether the note is published to the public marketplace" },
+        "ownerId": { "type": "string", "description": "UID of the author/owner" },
+        "sellerEmail": { "type": "string", "description": "Email address of the seller" },
+        "createdAt": { "type": "string", "description": "ISO timestamp when note was created" },
+        "updatedAt": { "type": "string", "description": "ISO timestamp when note was last modified" }
+      },
+      "required": ["title", "subject", "content", "price", "isPublic", "ownerId", "sellerEmail", "createdAt", "updatedAt"]
+    },
+    "Purchase": {
+      "title": "Purchase",
+      "description": "A demo purchase receipt granting access to a paid study note.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique identifier of the purchase record" },
+        "buyerId": { "type": "string", "description": "UID of the student purchasing the note" },
+        "sellerId": { "type": "string", "description": "UID of the note author/seller" },
+        "noteId": { "type": "string", "description": "Identifier of the purchased note" },
+        "title": { "type": "string", "description": "Title of the note at time of purchase" },
+        "subject": { "type": "string", "description": "Academic subject" },
+        "content": { "type": "string", "description": "Snapshot content unlocked by buyer" },
+        "price": { "type": "number", "description": "Price paid during demo checkout" },
+        "purchasedAt": { "type": "string", "description": "ISO timestamp when purchased" }
+      },
+      "required": ["buyerId", "sellerId", "noteId", "title", "subject", "content", "price", "purchasedAt"]
+    }
+  },
+  "firestore": {
+    "/notes/{noteId}": {
+      "schema": "#/entities/Note",
+      "description": "Collection of notes owned by students, readable publicly when isPublic is true."
+    },
+    "/purchases/{purchaseId}": {
+      "schema": "#/entities/Purchase",
+      "description": "Collection of demo purchases, readable only by buyer or seller."
+    }
+  }
+}

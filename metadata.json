@@ -1,0 +1,6 @@
+{
+  "name": "NoteNest - Notes & Study Marketplace",
+  "description": "Create, organize, and discover study notes. Publish to the student marketplace, make demo purchases, and share study materials.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
